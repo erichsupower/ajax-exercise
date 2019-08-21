@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>XMLHttpRequest</title>
+</head>
+
+<body>
+    <p class="result"></p>
+    <span class="result2"></span>
+
+    <script>
+        
+        const result = document.querySelector('.result');
+        const result2 = document.querySelector('.result2');
+        
+        function reqOnload() {
+            const data = JSON.parse(this.responseText);
+            
+            var email = data.results[0].email;
+            result.textContent = email;
+
+            var seed = data.info.seed;
+            result2.textContent = seed;
+        }
+
+        function reqError(err) {
+            console.log('錯誤', err)
+        }
+
+        // 宣告一個 XHR 的物件
+        var request = new XMLHttpRequest();
+
+        // 定義連線方式
+        request.open('get', 'https://randomuser.me/api/', true);
+        
+        // 送出請求
+        request.send();
+
+        // 如果成功就執行 reqOnload()
+        request.onload = reqOnload;
+
+        // 失敗就 reqError()
+        request.onerror = reqError;
+
+    </script>
+</body>
+
+</html>
