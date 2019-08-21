@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Axios</title>
+</head>
+
+<body>
+    <p class="result"></p>
+    <p class="result2"></p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+
+    <script>
+        const result = document.querySelector('.result');
+        const result2 = document.querySelector('.result2');
+
+        axios.get('https://randomuser.me/api/')
+            .then(function (response) {
+                // 處理成功
+                let data = response.data;
+                result.textContent = data.results[0].email;
+                result2.textContent = data.info.seed;
+            })
+            .catch(function (error) {
+                // 處理錯誤
+                console.log(error);
+            })
+            .finally(function () {
+                // 總是執行
+                console.log('I always Execued');
+            });
+    </script>
+</body>
+
+</html>
