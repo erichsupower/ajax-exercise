@@ -13,13 +13,16 @@
     <span class="result2"></span>
 
     <script>
-        
         const result = document.querySelector('.result');
         const result2 = document.querySelector('.result2');
-        
+
+        function reqListener() {
+            alert(this.responseText);
+        }
+
         function reqOnload() {
             const data = JSON.parse(this.responseText);
-            
+
             var email = data.results[0].email;
             result.textContent = email;
 
@@ -34,9 +37,12 @@
         // 宣告一個 XHR 的物件
         var request = new XMLHttpRequest();
 
+        // 讀取完成後的偵聽事件
+        request.addEventListener("load", reqListener);
+
         // 定義連線方式
         request.open('get', 'https://randomuser.me/api/', true);
-        
+
         // 送出請求
         request.send();
 
@@ -45,7 +51,6 @@
 
         // 失敗就 reqError()
         request.onerror = reqError;
-
     </script>
 </body>
 
