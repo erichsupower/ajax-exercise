@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fetch Ajax</title>
+</head>
+
+<body>
+    <h1>Fetch Ajax</h1>
+
+    <script>
+        fetch('http://localhost:3000/students', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: "Mary",
+                gender: "female",
+                birthday: "1990/04/23",
+                city: "Tokyo"
+            })
+        }).then(function (data) {
+            // 轉換反回的 json 資料
+            return data.json();
+        }).then(function (result) {
+            console.log(result);
+        }).catch(function (error) {
+            console.log(result);
+        })
+    </script>
+</body>
+
+</html>
