@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax with json-server</title>
+</head>
+<body>
+    <p>Pure Ajax</p>
+
+    <script>
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', 'http://localhost:3000/students');
+
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function() {
+
+            // 使用 POST 方法，成功會回傳狀態 201
+            if (xhr.status === 201) {
+
+                // 將回傳後的 json 文字，轉換成 javascript 物件
+                var result = JSON.parse(xhr.responseText);
+                console.log(result);
+
+            } else {
+
+                console.log("Ajax error!");
+
+            }
+        }
+
+        // 送出時，將 javascript 物件，轉換成 json 文字
+        xhr.send(JSON.stringify(
+
+            {
+                name: "Mary",
+                gender: "female",
+                birthday: "1990/04/23",
+                city: "Tokyo"
+            }
+
+        ));
+    </script>
+</body>
+</html>
